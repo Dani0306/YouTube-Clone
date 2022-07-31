@@ -14,11 +14,11 @@ const VideoPlayerRelated = ({ relatedLoading }) => {
   )
 
   return (
-    <div className='videoplayer-related scrollbar-hide lg:w-[30%] lg:flex lg:flex-col pb-10'>
+    <div className='videoplayer-related scrollbar-hide lg:w-[30%] lg:flex lg:flex-col'>
       {
         relatedVideos.map((item, index) => {
           const { items } = item;
-          const { id, contentDetails: { duration }, snippet: {  title, channelTitle, publishedAt, thumbnails: { high: { url } } }, statistics: { viewCount, } } = items[0];
+          const { contentDetails: { duration }, snippet: {  title, channelTitle, publishedAt, thumbnails: { high: { url } } }, statistics: { viewCount, } } = items[0];
           return (
             <VideoRelatedVideoComponent key={index} duration={duration} channelTitle={channelTitle} publishedAt={publishedAt} viewCount={viewCount} title={title} url={url}/>
           )            

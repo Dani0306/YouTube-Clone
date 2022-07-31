@@ -1,33 +1,28 @@
 import { FlagOutlined, LibraryAddOutlined, ReplyOutlined, ThumbDownOutlined, ThumbUpOutlined } from '@mui/icons-material'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
+import ReactPlayer from 'react-player'
+
 
 const VideoPlayerActions = () => {
 
     const currentVideo = useSelector(state => state.videos.currentVideo);
     const currentChannel = useSelector(state => state.videos.currentChannel);
-    console.log(currentChannel)
     const { id } = useParams()
-
-        // const { snippet: { channelTitle, publishedAt, tags, channelId, deafultAudioLanguage, description, title, }, 
-        // contentDetails: { duration, definition }, thumbnails: { high: { url } },
-        // statistics: { commentCount, likeCount, viewCount } } = currentVideo;
 
   return (
     <div className='w-full flex flex-col lg:w-[70%] mr-10'>
             {
-               
                 <>
-                    <div className='w-full min-h-[210px] max-h-[700px] max-w-full flex-grow items-center justify-center flex'>
-                  <video src={`https://www.youtube.com/watch?v=${id}`} controls className='w-full h-full object-cover'></video>
-              </div>
+            <div className='w-full min-h-[210px] max-h-[700px] max-w-full flex-grow items-center justify-center flex'>
+                <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} width='100%' height='100%'/>
+            </div>
 
 
             <div className='w-full lg:flex justify-between items-center'>      
               <div className='w-full flex flex-col items-start justify-center pt-3 px-4 lg:px-0'>
                 <h2 className='text-xl font-semibold text-white'>{currentVideo?.snippet?.title}</h2>
-                <span className='text-[#bbb] text-sm'>{currentVideo?.statistics?.viewCount} views - hace 9 dias</span>
+                <span className='text-[#bbb] text-sm'>{new Intl.NumberFormat('en-us').format(currentVideo?.statistics?.viewCount)} views</span>
               </div>
 
             <div className='w-full flex items-center justify-between md:justify-start my-5 px-4 lg:justify-end'>
@@ -36,7 +31,7 @@ const VideoPlayerActions = () => {
                         <ThumbUpOutlined className='text-white h-8 w-8'/>
                     </button>
                     <strong className='text-white text-xs mt-1'>
-                        {currentVideo.statistics?.likeCount}
+                        {new Intl.NumberFormat('en-us').format(currentVideo?.statistics?.likeCount)}
                     </strong>
                 </div>
                 <div className='flex flex-col items-center justify-center md:mx-4'>
@@ -80,7 +75,7 @@ const VideoPlayerActions = () => {
                     </div>
                     <div className='w-[70%] flex flex-col items-start justify-center'>
                         <span className='font-bold text-white'>{currentVideo?.snippet?.channelTitle}</span>
-                        <span className='text-[#bbb]'>{currentChannel?.statistics?.subscriberCount} subscriptors</span>
+                        <span className='text-[#bbb]'>{new Intl.NumberFormat('en-us').format(currentChannel?.statistics?.subscriberCount)} subscriptors</span>
                     </div>
                 </div>
                 <div className='w-[40%] flex items-center justify-end px-4'>
@@ -88,7 +83,7 @@ const VideoPlayerActions = () => {
                 </div>
             </div>
             <div className='flex items-center justify-between my-2 px-4 lg:my-4'>
-                <strong className='text-white'>Comments . {currentVideo?.statistics?.commentCount}</strong>
+                <strong className='text-white'>Comments . {new Intl.NumberFormat('en-us').format(currentVideo?.statistics?.commentCount)}</strong>
                 <button className='lg:hidden'>watch</button>
             </div>
                 </>

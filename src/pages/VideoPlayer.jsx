@@ -29,7 +29,7 @@ const VideoPlayer = () => {
         }
         const relatedvideos = await Promise.all(items);
         dispatch(setRelatedVideos(relatedvideos))
-        setRelatedLoading(true)
+        setRelatedLoading(false)
     }
     getChannels()
   }, [])
